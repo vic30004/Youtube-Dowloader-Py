@@ -9,11 +9,31 @@ root.title('Youtube Downloader')
 root.configure(background="#333")
 root.minsize(width=420, height=100)
 
-# Main Functions 
+# Main Functions
+
+
 def open_file():
     global directory
     directory = askdirectory()
     print(directory)
+
+
+# Download file Func
+def download():
+    # Check to make sure a link was added
+    if len(link.get()) == 0:
+        messagebox.showerror(
+            "Please make sure Link input is not empty", "Link can not be empty")
+    else:
+        try:
+            YouTube(link.get()).streams.first().download(directory)
+            messagebox.showinfo("Complete", "Video downloaded successfully")
+            link_entry.delete(0, 'end')
+        except:
+            messagebox.showinfo("Something went wrong",
+                                "Something went wrong, please try again")
+        finally:
+            messagebox.showinfo("Thank you for using this app!")
 
 
 # this wont let user change the size of the widget
@@ -22,17 +42,17 @@ root.resizable(width=False, height=False)
 # Link Label
 link_lbl = Label(root, text="Enter Link",
                  font="Helvetica 12 bold").grid(row=1, column=0)
-#Link Input
+# Link Input
 link = StringVar()
 link_entry = Entry(root, textvariable=link, width=50,
                    borderwidth=4).grid(row=1, column=1)
 
-#Select directory Buton 
+# Select directory Buton
 select_dir = Button(root, text="Choose Directory", bg="#DC143C", font="Helvetica 10 bold", width=15,
                     command=open_file).grid(row=1, column=2)
 
 # Download Button
-download_btn = Button(root, text="Download", bg="light green",font="Helvetica 10 bold", width=10,
-                      command='').grid(row=2, column=1)
+download_btn = Button(root, text="Download", bg="light green", font="Helvetica 10 bold", width=10,
+                      command=download).grid(row=2, column=1)
 
 root.mainloop()
