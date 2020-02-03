@@ -17,23 +17,13 @@ def open_file():
     directory = askdirectory()
     print(directory)
 
-
-# Download file Func
 def download():
-    # Check to make sure a link was added
     if len(link.get()) == 0:
-        messagebox.showerror(
-            "Please make sure Link input is not empty", "Link can not be empty")
+        messagebox.showerror("Link Empty", "Link can not be empty")
     else:
-        try:
-            YouTube(link.get()).streams.first().download(directory)
-            messagebox.showinfo("Complete", "Video downloaded successfully")
-            link_entry.delete(0, 'end')
-        except:
-            messagebox.showinfo("Something went wrong",
-                                "Something went wrong, please try again")
-        finally:
-            messagebox.showinfo("Thank you for using this app!")
+        YouTube(link.get()).streams.first().download(directory)
+        messagebox.showinfo("Complete", "Video downloaded successfully")
+        link_entry.delete(0, 'end')
 
 
 # this wont let user change the size of the widget
