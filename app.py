@@ -20,3 +20,6 @@ link_entry = Entry(root, textvariable=link, width=50,
 
 select_dir = Button(root, text="Choose Directory", width=15,
                     command='').grid(row=1, column=2)
+
+download_btn = Button(root, text="Download", width=10,
+                      command='').grid(row=2, column=1)
